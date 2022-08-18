@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demo.white">
+    package="com.white.unlimited.secure.tool.fast">
 
     <application
-        android:name=".app.White0816"
+        android:name="com.white.unlimited.secure.tool.fast.app.White0816"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.White">
         <activity
-            android:name=".ac.Main0816Ac"
+            android:name="com.white.unlimited.secure.tool.fast.ac.Main0816Ac"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -20,16 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ac.Home0816Ac"
+        <activity android:name="com.white.unlimited.secure.tool.fast.ac.Home0816Ac"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ac.Set0816Ac"
+        <activity android:name="com.white.unlimited.secure.tool.fast.ac.Set0816Ac"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ac.Web0816Ac"
+        <activity android:name="com.white.unlimited.secure.tool.fast.ac.Web0816Ac"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ac.Server0816Ac"
+        <activity android:name="com.white.unlimited.secure.tool.fast.ac.Server0816Ac"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ac.Result0816Ac"
+        <activity android:name="com.white.unlimited.secure.tool.fast.ac.Result0816Ac"
             android:screenOrientation="portrait"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>
 
 </manifest>
