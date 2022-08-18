@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="57dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/server_item_bg_selector">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_server_flag"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/icon_fast"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_server_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="#000208"
+        android:text="Faster server"
+        android:layout_marginLeft="12dp"
+        />
+</LinearLayout>

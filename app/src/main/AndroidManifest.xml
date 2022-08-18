@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.demo.white">
+
+    <application
+        android:name=".app.White0816"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.White">
+        <activity
+            android:name=".ac.Main0816Ac"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ac.Home0816Ac"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ac.Set0816Ac"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ac.Web0816Ac"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ac.Server0816Ac"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ac.Result0816Ac"
+            android:screenOrientation="portrait"/>
+    </application>
+
+</manifest>
