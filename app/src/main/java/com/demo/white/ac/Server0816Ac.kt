@@ -3,13 +3,19 @@ package com.demo.white.ac
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.white.R
+import com.demo.white.ad.Ad0816Type
+import com.demo.white.ad.Load0816AdMa
+import com.demo.white.ad.Show0816FullAd
 import com.demo.white.en.Server0816En
 import com.demo.white.ma.Connect0816Ma
 import com.demo.white.recyclerview.Server0816Adapter
 import kotlinx.android.synthetic.main.layout_server.*
 
 class Server0816Ac:Base0816Ac(R.layout.layout_server) {
+    private val backAd by lazy { Show0816FullAd(this,Ad0816Type.BACK0816){ finish() } }
+
     override fun initView() {
+        Load0816AdMa.doLogic(Ad0816Type.BACK0816)
         iv_back.setOnClickListener { finish() }
 
         recycler_view.apply {
@@ -53,5 +59,13 @@ class Server0816Ac:Base0816Ac(R.layout.layout_server) {
             setNegativeButton("cancel",null)
             show()
         }
+    }
+
+    override fun onBackPressed() {
+        if (backAd.hasAd()){
+            backAd.showFullAd()
+            return
+        }
+        finish()
     }
 }

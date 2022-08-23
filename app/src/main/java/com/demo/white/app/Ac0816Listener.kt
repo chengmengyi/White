@@ -7,6 +7,8 @@ import android.os.Bundle
 import com.blankj.utilcode.util.ActivityUtils
 import com.demo.white.ac.Home0816Ac
 import com.demo.white.ac.Main0816Ac
+import com.demo.white.ad.Load0816AdMa
+import com.google.android.gms.ads.AdActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -54,8 +56,9 @@ object Ac0816Listener {
                 global0816Scope= GlobalScope.launch {
                     delay(3000L)
                     reload0816=true
-//                    ActivityUtils.finishActivity(Main0810Activity::class.java)
-//                    ActivityUtils.finishActivity(AdActivity::class.java)
+                    Load0816AdMa.showingFullAd=false
+                    ActivityUtils.finishActivity(Main0816Ac::class.java)
+                    ActivityUtils.finishActivity(AdActivity::class.java)
                 }
             }
         }

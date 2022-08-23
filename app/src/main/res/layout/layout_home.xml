@@ -108,4 +108,9 @@
         app:layout_constraintTop_toTopOf="@id/view_choose_server"
         app:layout_constraintRight_toRightOf="@id/view_choose_server"
         app:layout_constraintBottom_toBottomOf="@id/view_choose_server"/>
+    <include layout="@layout/layout_home_ad"
+        android:layout_width="match_parent"
+        android:layout_height="211dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,13 @@ import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AlertDialog
 import com.blankj.utilcode.util.SizeUtils.dp2px
 import com.demo.white.R
+import com.demo.white.ad.Ad0816Type
+import com.demo.white.ad.Load0816AdMa
+import com.demo.white.ad.Show0816FullAd
+import com.demo.white.ad.Show0816NativeAd
 import com.demo.white.app.*
 import com.demo.white.ma.Connect0816Ma
 import com.demo.white.ma.TimeMa
-import com.github.shadowsocks.bg.BaseService
 import com.github.shadowsocks.utils.StartService
 import kotlinx.android.synthetic.main.layout_home.*
 
@@ -21,6 +24,9 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
     private var connect=false
     private val instance=dp2px(98F)
     private var loopCheckAnimator:ValueAnimator?=null
+
+    private val connectAd by lazy { Show0816FullAd(this,Ad0816Type.CONNECT0816){ jump() } }
+    private val homeAd by lazy { Show0816NativeAd(this,Ad0816Type.HOME0816) }
 
 
     private val launcher = registerForActivityResult(StartService()) {
@@ -38,6 +44,7 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
         Connect0816Ma.onCreate(this)
         TimeMa.addCallback(this)
         Connect0816Ma.setIConnectStateCallback(this)
+        updateCurrentServerInfo()
         setOnClick()
     }
 
@@ -61,6 +68,8 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
 
     private fun clickConnectBtn(connected:Boolean=Connect0816Ma.isConnected()){
         canClick=false
+        Load0816AdMa.doLogic(Ad0816Type.CONNECT0816)
+        Load0816AdMa.doLogic(Ad0816Type.RESULT0816)
         if (connected){
             disconnectServer()
         }else{
@@ -98,10 +107,11 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
                 iv_center_view.translationY=getTranslationY(connect, pro)
                 val duration = (10 * (pro / 100.0F)).toInt()
                 if (duration in 2..9){
-                    if (Connect0816Ma.isConnectedOrStoppedSuccess(connect)){
+                    if (connectAd.hasAd()&&Connect0816Ma.isConnectedOrStoppedSuccess(connect)){
                         stopLoopAnimator()
                         iv_center_view.translationY=getTranslationY(connect, 100)
-                        checkResult()
+                        checkResult(jump = false)
+                        connectAd.showFullAd()
                     }
                 }else if (duration>=10){
                     checkResult()
@@ -146,7 +156,6 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
     private fun updateConnectedUI(){
         iv_center_connect_btn.show(false)
         tv_connect_time.show(true)
-        TimeMa.start()
         view_center_bg.setBackgroundResource(R.drawable.bg_8164ff_50dp)
     }
 
@@ -154,7 +163,6 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
         tv_connect_time.text="00:00:00"
         iv_center_connect_btn.show(true)
         tv_connect_time.show(false)
-        TimeMa.stop()
         view_center_bg.setBackgroundResource(R.drawable.bg_d0cce0_50dp)
     }
 
@@ -210,6 +218,9 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
                 clickConnectBtn(true)
             }
         }
+        if (Ac0816Listener.refreshHomeNativeAd){
+            homeAd.checkNativeAdLoadFinish()
+        }
     }
 
     override fun connectTimeCallback(time: String) {
@@ -221,15 +232,19 @@ class Home0816Ac:Base0816Ac(R.layout.layout_home), TimeMa.IConnectTimeCallback,
         Connect0816Ma.onDestroy()
         stopLoopAnimator()
         TimeMa.removeCallback(this)
+        Ac0816Listener.refreshHomeNativeAd=true
+        homeAd.onDestroy()
     }
 
     override fun connectedCallback() {
         updateConnectedUI()
+        iv_center_view.translationY=getTranslationY(true, 100)
     }
 
     override fun stoppedCallback() {
         if (canClick){
             updateStoppedUI()
+            iv_center_view.translationY=0F
         }
     }
 }

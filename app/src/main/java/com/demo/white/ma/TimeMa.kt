@@ -1,5 +1,6 @@
 package com.demo.white.ma
 
+import com.demo.white.app.print0816
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -7,7 +8,6 @@ object TimeMa {
     private var time=0L
     private var global0816Scope:Job?=null
     private var listener= arrayListOf<IConnectTimeCallback>()
-
 
     fun start(){
         global0816Scope= GlobalScope.launch(Dispatchers.Main) {

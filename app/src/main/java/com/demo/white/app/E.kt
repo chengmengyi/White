@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import com.demo.white.R
 import com.demo.white.en.Server0816En
@@ -64,4 +65,9 @@ fun getFlag(c:String)=when(c){
     else-> R.drawable.icon_fast
 }
 
+fun print0816(string: String){
+    Log.e("qwer0816",string)
+}
+
 fun getServerName(en:Server0816En)=if (en.isFast()) "Faster server" else "${en.country_0816} - ${en.city_0816}"
+

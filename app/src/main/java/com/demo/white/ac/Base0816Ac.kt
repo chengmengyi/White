@@ -10,6 +10,8 @@ import com.gyf.immersionbar.ImmersionBar
 abstract class Base0816Ac(
     private val layoutId:Int
 ) : AppCompatActivity(){
+    var isResume=false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         density()
@@ -36,6 +38,21 @@ abstract class Base0816Ac(
 
     protected fun toast(s: String){
         Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isResume=true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isResume=false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        isResume=false
     }
 
 }

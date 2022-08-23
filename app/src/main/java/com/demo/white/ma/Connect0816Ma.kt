@@ -2,6 +2,7 @@ package com.demo.white.ma
 
 import com.demo.white.ac.Base0816Ac
 import com.demo.white.ac.Home0816Ac
+import com.demo.white.app.print0816
 import com.demo.white.en.Server0816En
 import com.github.shadowsocks.Core
 import com.github.shadowsocks.aidl.IShadowsocksService
@@ -40,7 +41,11 @@ object Connect0816Ma:ShadowsocksConnection.Callback{
         this.state=state
         changeServerBean()
         if (isStopped()){
+            TimeMa.stop()
             iConnectStateCallback?.stoppedCallback()
+        }
+        if (isConnected()){
+            TimeMa.start()
         }
     }
 

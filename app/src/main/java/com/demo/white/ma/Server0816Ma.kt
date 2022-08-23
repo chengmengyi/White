@@ -9,11 +9,18 @@ import org.json.JSONObject
 object Server0816Ma {
     private val local= arrayListOf<Server0816En>()
 
-    fun getServerList():ArrayList<Server0816En>{
-        return local
-    }
+    fun getServerList() = Read0816Ma.server.ifEmpty { local }
 
-    fun getFastServer()=getServerList().randomOrNull()
+    fun getFastServer():Server0816En?{
+        val serverList = getServerList()
+        if (!Read0816Ma.city.isNullOrEmpty()){
+            val filter = serverList.filter { Read0816Ma.city.contains(it.city_0816) }
+            if (!filter.isNullOrEmpty()){
+                return filter.randomOrNull()
+            }
+        }
+        return serverList.randomOrNull()
+    }
     
     fun initLocalServer(){
         local.clear()
